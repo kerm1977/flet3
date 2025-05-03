@@ -1,0 +1,42 @@
+Necesito una aplicacion flet que sea compatible también con 0.27.2 Que se conecte a una base de datos sqlite3
+
+
+1. Que vaya a una vista llamada home
+2. Que tenga una barra de navegación siempre visible sin importa las vistas
+	import flet as ft
+	name = "NavigationBar Example"
+
+
+	def example():
+
+	    pagelet = ft.Pagelet(
+	        navigation_bar=ft.NavigationBar(
+	            destinations=[
+	                ft.NavigationBarDestination(icon=ft.Icons.EXPLORE, label="Explore"),
+	                ft.NavigationBarDestination(icon=ft.Icons.COMMUTE, label="Commute"),
+	                ft.NavigationBarDestination(
+	                    icon=ft.Icons.BOOKMARK_BORDER,
+	                    selected_icon=ft.Icons.BOOKMARK,
+	                    label="Explore",
+	                ),
+	            ],
+	        ),
+	        content=ft.Container(),
+	        height=400,
+	    )
+
+	    return pagelet
+
+
+3. Que el home tenga un icono de usuario superior derecho y al hacer click lleve a un formulario login que ingrese con usuario y contraseña y que se pueda mostrar el password. Además que cuente con un botón recordarme que funcione y mensajes para saber que tiempo de error o coneccion satisfactoria sucedio. También un enlace que lleve a registrarme.
+
+4. Que al ir al enlace tenga un formulario llamado registro que se pueda registrar con usuario, email, teléfono, password confirmarPassword y que muestre mensajes de acción si algo fallara 
+
+5. si está logueado, desaparezca el icono de usuario y aparezca el botón de salir 
+ 
+
+
+
+
+
+
