@@ -12,21 +12,7 @@ class MainApp:
         self.logged_in = is_logged_in()
         self.logged_in_username = get_logged_in_username()
         self.views = Views(page) # Instancia de la clase Views
-        self.navigation_bar = ft.NavigationBar(
-            bgcolor=ft.Colors.AMBER,
-            destinations=[
-                ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Inicio"),
-                ft.NavigationBarDestination(icon=ft.Icons.EVENT, label="Eventos"),
-                ft.NavigationBarDestination(icon=ft.Icons.CONTACTS, label="Contactos"),
-                ft.NavigationBarDestination(
-                    icon=ft.Icons.PERSON,
-                    label="Mi cuenta",
-                    disabled=not self.logged_in,
-                ),
-            ],
-            on_change=self.navigation_change,
-            visible=True,
-        )
+        self.navigation_bar = self.views.navigation_bar # Obtiene la barra de navegación de la instancia de Views
         self.current_view = ft.Container(expand=True)
         self.user_icon_button = ft.IconButton(ft.Icons.PERSON, on_click=lambda _: self.page.go("/login"))
         self.logout_button = ft.IconButton(ft.Icons.EXIT_TO_APP, on_click=self.logout)
@@ -107,5 +93,7 @@ def main(page: ft.Page):
     MainApp(page)
 
 if __name__ == "__main__":
-    ft.app(target=main)
+        ft.app(target=main)
+        
+
 

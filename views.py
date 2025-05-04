@@ -12,6 +12,7 @@ class Views:
         self.build_registration_form()
         self.build_home_view()
         self.build_events_view()
+        self.navigation_bar = self.build_navigation_bar() # Inicializa la barra de navegación
 
     def build_login_form(self):
         self.username_field = ft.TextField(label="Usuario")
@@ -85,6 +86,35 @@ class Views:
             expand=True,
         )
 
+    def build_navigation_bar(self):
+        """Construye y devuelve la barra de navegación."""
+        navigation_bar = ft.NavigationBar(
+            bgcolor=ft.Colors.AMBER,
+            destinations=[
+                ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Inicio"),
+                ft.NavigationBarDestination(icon=ft.Icons.EVENT, label="Eventos"),
+                ft.NavigationBarDestination(icon=ft.Icons.CONTACTS, label="Contactos"),
+                ft.NavigationBarDestination(
+                    icon=ft.Icons.PERSON,
+                    label="Mi cuenta",
+                    disabled=True,  # Inicialmente deshabilitado
+                ),
+            ],
+            on_change=self.navigation_change,
+            visible=True,
+        )
+        return navigation_bar
+
+    def navigation_change(self, e):
+        if e.control.selected_index == 0:
+            self.page.go("/home")
+        elif e.control.selected_index == 1:
+            self.page.go("/events")
+        elif e.control.selected_index == 2:
+            pass
+        elif e.control.selected_index == 3:
+            self.page.go("/mi_cuenta")
+
     def login(self, e):
         username = self.username_field.value
         password = self.password_field.value
@@ -96,6 +126,8 @@ class Views:
             self.error_message.value = ""
             self.logged_in = True
             self.logged_in_username = user_data[1]
+            # Actualiza la propiedad disabled del botón "Mi cuenta"
+            self.navigation_bar.destinations[3].disabled = False # Usa self.navigation_bar
             self.page.go("/home")
             self.page.update()
         else:
@@ -135,5 +167,6 @@ class Views:
     def hash_password(self, password):
         """Hashea la contraseña utilizando SHA256."""
         return hashlib.sha256(password.encode()).hexdigest()
+
 
 
